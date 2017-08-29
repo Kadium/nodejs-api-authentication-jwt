@@ -41,7 +41,7 @@ Require authentication and following in header :
 
 ```json
 {
-  "Authorization": "Bearer" + {token jwt}
+  "Authorization": "Bearer " + {token jwt}
 }
 ```
 
@@ -49,11 +49,10 @@ It returns the following :
 
 ```json
 {
-  "_id": {id},
-  "name": {name},
-  "password": {encrypted password},
-  "email": {email},
-  "superUser": {superUser},
+  "_id": {"id"},
+  "name": {"name"},
+  "email": {"email"},
+  "superUser": {"superUser"},
 }
 ```
 
@@ -66,7 +65,7 @@ Require authentication and following in header :
 
 ```json
 {
-  "Authorization": "Bearer" + {token jwt}
+  "Authorization": "Bearer " + {token jwt}
 }
 ```
 
@@ -76,7 +75,6 @@ It returns the following :
 {
   "_id": {id},
   "name": {name},
-  "password": {encrypted password},
   "email": {email},
   "superUser": {superUser},
 }
@@ -91,7 +89,7 @@ Require authentication and following in header :
 
 ```json
 {
-  "Authorization": "Bearer" + {token jwt}
+  "Authorization": "Bearer " + {token jwt}
 }
 ```
 
@@ -111,7 +109,7 @@ Require authentication and following in header :
 
 ```json
 {
-  "Authorization": "Bearer" + {token jwt}
+  "Authorization": "Bearer " + {token jwt}
 }
 ```
 
@@ -135,7 +133,7 @@ It returns the following :
 
 ```json
 {
-  "token": "Bearer" + {token jwt}
+  "token": "Bearer " + {token jwt}
 }
 ```
 
@@ -159,7 +157,7 @@ It returns the following :
 The link expires after 1 hour.
 
 
-#### `GET `/api/reset/:token`
+#### GET `/api/reset/:token`
 
 To reset the password.
 

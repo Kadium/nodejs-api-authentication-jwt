@@ -60,7 +60,12 @@ exports.getUserById = function (req, res) {
     User.findById(req.params.id, function (err, user) {
       if (!err) {
         if (user) {
-          return res.status(200).send(user);
+          return res.status(200).send({
+            id: req.user._id,
+            name: req.user.name,
+            email: req.user.email,
+            superUser: req.user.superUser
+          });
         } else {
           return res.status(404).send({
             message: 'User ' + req.params.id + ' was not found'
@@ -133,7 +138,7 @@ exports.patchCurrentUser = function (req, res) {
     if (CryptPassword(req.user._id, user, req.body.password) == 0) {
       return res.status(200).send({
         message: 'User updated.'
-      })
+      });
     }
     else {
       return res.status(403).send({
@@ -194,9 +199,11 @@ exports.reset = function (req, res) {
     user.password = pwd;
     user.resetPasswordToken = undefined;
     user.resetPasswordExpires = undefined;
-    return res.status(200).send({
-      password: pwd
-    });
+    if (CryptPassword(user._id, user, pwd) == 0) {
+      return res.status(200).send({
+          password: pwd
+      });
+    }
   });
 };
 
