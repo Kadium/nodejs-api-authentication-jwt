@@ -3,27 +3,31 @@ var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
 
 var UserSchema = new Schema({
-    name: {
-        type: String,
-        unique: true,
-        required: true
+        name: {
+            type: String,
+            unique: true,
+            required: true
+        },
+        password: {
+            type: String,
+            required: true
+        },
+        email: {
+            type: String,
+            unique: true,
+            required: true
+        },
+        superUser: {
+            type: Boolean,
+            required: false
+        },
+        resetPasswordToken: String,
+        resetPasswordExpires: Date
     },
-    password: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        unique: true,
-        required: true
-    },
-    superUser: {
-        type: Boolean,
-        required: false
-    },
-    resetPasswordToken: String,
-    resetPasswordExpires: Date
-});
+    {
+        versionKey: false
+    })
+;
 
 UserSchema.pre('save', function (next) {
     var user = this;
@@ -67,4 +71,9 @@ module.exports.updateUser = function (id, user, options, callback) {
         resetPasswordExpires: user.resetPasswordExpires
     };
     User.findOneAndUpdate(query, update, options, callback);
+};
+
+module.exports.deleteUser = function (id, options, callback) {
+    var query = {_id: id};
+    User.findOneAndDelete(query, options, callback);
 };
